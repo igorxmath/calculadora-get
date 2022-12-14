@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+<body>
+
+  <form id="regForm" action="">
+
+  <div class="section hero" id="containermv">
+    <div class="container">
+      <div class="row">
+        <div class="column" style="margin-top: 50%">
+        <h1 class="hero-heading">Calculadora IMC</h1>
+        <p class="hero-description">IMC é a sigla para Índice de Massa Corpórea, parâmetro adotado pela <strong>Organização Mundial de Saúde</strong> para calcular o peso idealde cada pessoa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab">
+    <div class="section values">
+      <div class="container">
+        <div class="row">
+          <div class="six columns">
+            <label>Seu peso:</label>
+            <input class="u-full-width" type="text">
+          </div>
+          <div class="six columns">  
+            <label>Sua altura:</label>
+            <input class="u-full-width" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab">
+    <div class="section values">
+      <div class="container">
+        <div class="row">
+          <div class="six columns">
+            <label>Sua idade:</label>
+            <input class="u-full-width" type="text">
+          </div>
+          <div class="six columns">  
+            <label>Seu sexo:</label>
+            <select class="u-full-width">
+              <option value="Option 1" class="text-black">Masculino</option>
+              <option value="Option 2" class="text-black">Feminino</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section buttons-pre-next">
+    <div class="container">
+      <button type="button" class="button-secondary" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+      <button type="button" class="button-primary" id="nextBtn" onclick="nextPrev(1)">Proximo</button> 
+    </div>
+  </div>
+
+  <div class="section steps-show">
+    <div style="text-align:center;">
+      <span class="step"></span>
+      <span class="step"></span>
+    </div>
+  </div>
+
+</form>
+
+
+</body>
+</html>
+
+<!-- Javascript
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="js/script.js"></script>
