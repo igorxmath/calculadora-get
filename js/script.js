@@ -33,7 +33,7 @@ function nextPrev(n) {
         console.log(teste);
         document.getElementById("prevBtn").style.display = "none";
         document.getElementById("nextBtn").style.display = "none";
-        document.getElementById("containermv").style.display = "none";
+        document.getElementById("regForm").style.display = "none";
         return false;
       }
 
