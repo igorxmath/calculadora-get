@@ -28,12 +28,10 @@ function nextPrev(n) {
     currentTab = currentTab + n;
 
     if (currentTab >= x.length) {
-        // currentTab = 0; finish
-        var teste = document.getElementById("regForm").elements[3].value;
-        console.log(teste);
-        document.getElementById("prevBtn").style.display = "none";
-        document.getElementById("nextBtn").style.display = "none";
+        document.getElementById("containermv").style.display = "none";
         document.getElementById("regForm").style.display = "none";
+        document.getElementById("loaderid").style.display = "block";
+        waitFunction();
         return false;
       }
 
@@ -46,4 +44,68 @@ function fixStepIndicator(n) {
         x[i].className = x[i].className.replace(" active", "")
     }
     x[n].className += " active" 
+}
+
+function waitFunction() {
+    setTimeout(showPage, 1000);
+}
+
+function showPage() {
+    document.getElementById("loaderid").style.display = "none";
+    document.getElementById("results").style.display = "block";
+    document.getElementById("showResults").innerHTML = calculateTotalEnergy().toFixed(2);;
+}
+
+function calculateBasal() {
+    var BMR;
+
+    var itemsForm = document.getElementById("regForm").elements;
+
+    var weight = itemsForm[0].value, height = itemsForm[1].value, age = itemsForm[2].value, sex = itemsForm[3].value;
+
+    if (sex == "Option 1") {
+        BMR = 66.5 + (13.75 * weight) + (5.003 * height) - (6.75 * age);
+    }
+    else if (sex == "Option 2") {
+        BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
+    }
+    
+    console.log(BMR)
+
+    return BMR
+}
+
+function calculateIdActivite() {
+    var radios = document.getElementsByName("act");
+    var final;
+    var calc;
+
+    for (item of radios) {
+        if (item.checked) {
+            final = item.value
+        }
+    }
+
+    switch(final){
+        case "low":
+            calc = 1.2
+            break;
+        case "mid":
+            calc = 1.375
+            break;
+        case "high":
+            calc = 1.55
+            break;
+        case "intense":
+            calc = 1.725
+            break;
+    }
+
+    console.log(calc)
+    return calc
+
+}
+
+function calculateTotalEnergy() {
+    return calculateBasal() * calculateIdActivite();
 }

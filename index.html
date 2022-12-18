@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Your page title here :)</title>
+  <title>Calculadora de energia</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -35,8 +35,8 @@
       <div class="container">
         <div class="row">
           <div class="column">
-          <h1 class="hero-heading">Calculadora IMC</h1>
-          <p class="hero-description">IMC é a sigla para Índice de Massa Corpórea, parâmetro adotado pela <strong>Organização Mundial de Saúde</strong> para calcular o peso idealde cada pessoa.</p>
+          <h1 class="hero-heading">Calculadora Kcal</h1>
+          <p class="hero-description">O gasto calórico é a quantidade total de energia que o corpo gasta por dia, incluindo a energia que o corpo precisa para manter as funções básicas, como respiração, e a energia que se gasta em atividades feitas.</p>
           </div>
         </div>
       </div>
@@ -45,58 +45,105 @@
 
   <form id="regForm" action="">
 
-  <div class="tab">
-    <div class="section values">
-      <div class="container">
-        <div class="row">
-          <div class="six columns">
-            <label>Seu peso:</label>
-            <input class="u-full-width" type="number">
-          </div>
-          <div class="six columns">  
-            <label>Sua altura:</label>
-            <input class="u-full-width" type="number">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab">
-    <div class="section values">
-      <div class="container">
-        <div class="row">
-          <div class="six columns">
-            <label>Sua idade:</label>
-            <input class="u-full-width" type="tel">
-          </div>
-          <div class="six columns">  
-            <label>Seu sexo:</label>
-            <select class="u-full-width">
-              <option value="Option 1" class="text-black">Masculino</option>
-              <option value="Option 2" class="text-black">Feminino</option>
-            </select>
+    <div class="tab">
+      <div class="section values">
+        <div class="container">
+          <div class="row">
+            <div class="six columns">
+              <label>Seu peso:</label>
+              <input class="u-full-width" type="number">
+            </div>
+            <div class="six columns">  
+              <label>Sua altura:</label>
+              <input class="u-full-width" type="number">
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="section buttons-pre-next">
+    <div class="tab">
+      <div class="section values">
+        <div class="container">
+          <div class="row">
+            <div class="six columns">
+              <label>Sua idade:</label>
+              <input class="u-full-width" type="number">
+            </div>
+            <div class="six columns">  
+              <label>Seu sexo:</label>
+              <select class="u-full-width">
+                <option value="Option 1" class="text-black">Masculino</option>
+                <option value="Option 2" class="text-black">Feminino</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab">
+      <div class="section values">
+        <div class="container">
+          <div class="row">
+            <div class="column">
+
+              <label>Seu nível de atividade:</label>
+
+              <input type="radio" name="act" value="low">
+              <span class="label-body">Leve</span>
+
+              <input type="radio" name="act" value="mid">
+              <span class="label-body">Moderado</span>
+
+              <input type="radio" name="act" value="high">
+              <span class="label-body">Elevado</span>
+
+              <input type="radio" name="act" value="intense">
+              <span class="label-body">Intenso</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section buttons-pre-next">
+      <div class="container">
+        <button type="button" class="button-secondary" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+        <button type="button" class="button-primary" id="nextBtn" onclick="nextPrev(1)">Proximo</button> 
+      </div>
+    </div>
+
+    <div class="section steps-show">
+      <div style="text-align:center;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="section loading" id="loaderid" style="display:none;">
     <div class="container">
-      <button type="button" class="button-secondary" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-      <button type="button" class="button-primary" id="nextBtn" onclick="nextPrev(1)">Proximo</button> 
+      <div class="row">
+        <div class="column">
+          <div class="loader"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="section steps-show">
-    <div style="text-align:center;">
-      <span class="step"></span>
-      <span class="step"></span>
+  <div class="section results" id="results" style="display:none;">
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <p id="showResults"></p>
+        </div>
+      </div>
     </div>
   </div>
-
-</form>
 
 
 </body>
