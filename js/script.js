@@ -25,7 +25,7 @@ function nextPrev(n) {
     if (n == 1 && !validadeForm(x)) return false;
 
     if (n == 1 && currentTab + 1 == x.length && !validadeRadios()) {
-        alert("Marque uma opção");
+        alert("Marque uma opção de nível de atividade");
         return false;
     }
 
@@ -60,20 +60,17 @@ function validadeRadios() {
 function validadeForm(x) {
     var y = x[currentTab].getElementsByTagName("input");
     var i;
-    var ch = false;
 
     for (i=0; y.length > i; i++) {
         var strData = y[i].value
         if (strData == "") {
-            alert("Valores em branco")
+            alert("O formulário deve ser preenchido apenas com números e não deve estar vazio");
             return false;
         }
-        
         else if (!containsOnlyNumbers(strData) && !strData == "low" && !strData == "mid" && !strData == "high" && !strData == "intense") {
-            alert("Valores devem ser númericos")
+            alert("O formulário deve ser preenchido apenas com números e não deve estar vazio");
             return false;
         }
-
     }
 
     return true;
@@ -98,7 +95,11 @@ function waitFunction() {
 function showPage() {
     document.getElementById("loaderid").style.display = "none";
     document.getElementById("results").style.display = "block";
-    document.getElementById("showResults").innerHTML = calculateTotalEnergy().toFixed(2);;
+    document.getElementById("showResultsGET").innerHTML = calculateTotalEnergy().toFixed(2) + " Kcal";
+    document.getElementById("showResultsBMR").innerHTML = calculateBasal().toFixed(2) + " Kcal";
+
+    document.getElementById("resultsIMC").style.display = "block";
+    document.getElementById("showResultsIMC").innerHTML = "IMC elevado";
 }
 
 function calculateBasal() {

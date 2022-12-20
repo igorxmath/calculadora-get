@@ -135,12 +135,26 @@
     </div>
   </div>
 
-  <div class="section results" id="results" style="display:none;">
+  <div class="section values" id="results" style="display:none;">
     <div class="container">
       <div class="row">
-        <div class="column">
-          <h1 class="resultEnergy" id="showResults"></h1>
+        <div class="one-half column value resultEnergy">
+          <h6 class="value-heading">Gasto energético total</h6>
+          <h5 class="value-multiplier" id="showResultsGET"></h5>
         </div>
+        <div class="one-half column value resultEnergy">
+          <h6 class="value-heading">Gasto metabólico basal</h6>
+          <h5 class="value-multiplier" id="showResultsBMR"></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="resultsIMC" style="display:none;">
+    <div class="container">
+      <div class="row">
+        <div class="one column value" style="text-align: center;">
+          <p id="showResultsIMC">Seu peso está elevado</p>
       </div>
     </div>
   </div>
