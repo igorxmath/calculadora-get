@@ -22,6 +22,13 @@ function showTab(n) {
 function nextPrev(n) {
     var x = document.getElementsByClassName("tab");
 
+    if (n == 1 && !validadeForm(x)) return false;
+
+    if (n == 1 && currentTab + 1 == x.length && !validadeRadios()) {
+        alert("Marque uma opção");
+        return false;
+    }
+
     document.getElementsByClassName("step")[currentTab].className += " finish";
 
     x[currentTab].style.display = "none";
@@ -33,10 +40,48 @@ function nextPrev(n) {
         document.getElementById("loaderid").style.display = "block";
         waitFunction();
         return false;
-      }
+        }
 
     showTab(currentTab);
 }
+
+function validadeRadios() {
+    var radios = document.getElementsByName("act");
+
+    for (item of radios) {
+        if (item.checked) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function validadeForm(x) {
+    var y = x[currentTab].getElementsByTagName("input");
+    var i;
+    var ch = false;
+
+    for (i=0; y.length > i; i++) {
+        var strData = y[i].value
+        if (strData == "") {
+            alert("Valores em branco")
+            return false;
+        }
+        
+        else if (!containsOnlyNumbers(strData) && !strData == "low" && !strData == "mid" && !strData == "high" && !strData == "intense") {
+            alert("Valores devem ser númericos")
+            return false;
+        }
+
+    }
+
+    return true;
+}
+
+function containsOnlyNumbers(strData) {
+    return /^[0-9]+$/.test(strData);
+  }
 
 function fixStepIndicator(n) {
     var i, x = document.getElementsByClassName("step");
@@ -70,8 +115,6 @@ function calculateBasal() {
         BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
     }
     
-    console.log(BMR)
-
     return BMR
 }
 
