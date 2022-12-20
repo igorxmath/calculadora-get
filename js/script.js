@@ -101,9 +101,7 @@ function calculateIdActivite() {
             break;
     }
 
-    console.log(calc)
     return calc
-
 }
 
 function calculateTotalEnergy() {
