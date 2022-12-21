@@ -97,9 +97,6 @@ function showPage() {
     document.getElementById("results").style.display = "block";
     document.getElementById("showResultsGET").innerHTML = calculateTotalEnergy().toFixed(2) + " Kcal";
     document.getElementById("showResultsBMR").innerHTML = calculateBasal().toFixed(2) + " Kcal";
-
-    document.getElementById("resultsIMC").style.display = "block";
-    document.getElementById("showResultsIMC").innerHTML = "IMC elevado";
 }
 
 function calculateBasal() {
