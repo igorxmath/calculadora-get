@@ -1,9 +1,21 @@
+const listTabs = document.getElementsByClassName("tab");
+const radios = document.getElementsByName("act");
+const step = document.getElementsByClassName("step");
+
 var currentTab = 0;
 showTab(currentTab);
 
+// anonymous functions
+document.querySelector("#prevBtn").onclick = function () {
+    nextPrev(-1);
+}
+
+document.querySelector("#nextBtn").onclick = function () {
+    nextPrev(1);
+}
+
 function showTab(n) {
-    var x = document.getElementsByClassName("tab");
-    x[n].style.display = "block";
+    listTabs[n].style.display = "block";
 
     if (n == 0){
         document.getElementById("prevBtn").style.display = "none";
@@ -11,7 +23,7 @@ function showTab(n) {
         document.getElementById("prevBtn").style.display = "inline";
     }
 
-    if (n == (x.length - 1)){
+    if (n == (listTabs.length - 1)){
         document.getElementById("nextBtn").innerHTML = "Finalizar";
     } else {
         document.getElementById("nextBtn").innerHTML = "Próximo";
@@ -20,21 +32,19 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
-    var x = document.getElementsByClassName("tab");
+    if (n == 1 && !validadeForm()) return false;
 
-    if (n == 1 && !validadeForm(x)) return false;
-
-    if (n == 1 && currentTab + 1 == x.length && !validadeRadios()) {
+    if (n == 1 && currentTab + 1 == listTabs.length && !validadeRadios()) {
         alert("Marque uma opção de nível de atividade");
         return false;
     }
 
-    document.getElementsByClassName("step")[currentTab].className += " finish";
+    step[currentTab].className += " finish";
 
-    x[currentTab].style.display = "none";
+    listTabs[currentTab].style.display = "none";
     currentTab = currentTab + n;
 
-    if (currentTab >= x.length) {
+    if (currentTab >= listTabs.length) {
         document.getElementById("containermv").style.display = "none";
         document.getElementById("regForm").style.display = "none";
         document.getElementById("loaderid").style.display = "block";
@@ -46,8 +56,6 @@ function nextPrev(n) {
 }
 
 function validadeRadios() {
-    var radios = document.getElementsByName("act");
-
     for (item of radios) {
         if (item.checked) {
             return true;
@@ -57,12 +65,11 @@ function validadeRadios() {
     return false;
 }
 
-function validadeForm(x) {
-    var y = x[currentTab].getElementsByTagName("input");
-    var i;
+function validadeForm() {
+    const dataInput = listTabs[currentTab].getElementsByTagName("input");
 
-    for (i=0; y.length > i; i++) {
-        var strData = y[i].value
+    for (i=0; dataInput.length > i; i++) {
+        let strData = dataInput[i].value
         if (strData == "") {
             alert("O formulário deve ser preenchido apenas com números e não deve estar vazio");
             return false;
@@ -81,11 +88,10 @@ function containsOnlyNumbers(strData) {
   }
 
 function fixStepIndicator(n) {
-    var i, x = document.getElementsByClassName("step");
-    for (i=0; x.length > i; i++) {
-        x[i].className = x[i].className.replace(" active", "")
+    for (i=0; step.length > i; i++) {
+        step[i].className = step[i].className.replace(" active", "")
     }
-    x[n].className += " active" 
+    step[n].className += " active" 
 }
 
 function waitFunction() {
@@ -100,11 +106,11 @@ function showPage() {
 }
 
 function calculateBasal() {
-    var BMR;
+    let BMR;
 
-    var itemsForm = document.getElementById("regForm").elements;
+    const itemsForm = document.getElementById("regForm").elements;
 
-    var weight = itemsForm[0].value, height = itemsForm[1].value, age = itemsForm[2].value, sex = itemsForm[3].value;
+    let weight = itemsForm[0].value, height = itemsForm[1].value, age = itemsForm[2].value, sex = itemsForm[3].value;
 
     if (sex == "Option 1") {
         BMR = 66.5 + (13.75 * weight) + (5.003 * height) - (6.75 * age);
@@ -116,35 +122,34 @@ function calculateBasal() {
     return BMR
 }
 
-function calculateIdActivite() {
-    var radios = document.getElementsByName("act");
-    var final;
-    var calc;
+function calculateActivite() {
+    let itemCheck;
+    let multiplier;
 
     for (item of radios) {
         if (item.checked) {
-            final = item.value
+            itemCheck = item.value
         }
     }
 
-    switch(final){
+    switch(itemCheck){
         case "low":
-            calc = 1.2
+            multiplier = 1.2
             break;
         case "mid":
-            calc = 1.375
+            multiplier = 1.375
             break;
         case "high":
-            calc = 1.55
+            multiplier = 1.55
             break;
         case "intense":
-            calc = 1.725
+            multiplier = 1.725
             break;
     }
 
-    return calc
+    return multiplier
 }
 
 function calculateTotalEnergy() {
-    return calculateBasal() * calculateIdActivite();
+    return calculateBasal() * calculateActivite();
 }
