@@ -8,8 +8,8 @@
 </p>
 
 ## Funcionalidades do projeto
-- `Calculo de gasto energético`: Conversão rápida e simples de diversas medidas de temperatura.
-- `Interface web`: O projeto utiliza JavaScript e o responsivo Skeleton CSS com auto dark-mode
+- `Calculo energético`: Com poucos dados é possível saber seu gasto energético total e basal.
+- `Interface web`: O projeto utiliza JavaScript e o responsivo Skeleton CSS com auto dark-mode.
 
 <p align="center">
 <img src="https://xbn.igormatheus.com.br/zOGI1/DoMumisO82/raw.jpeg" />
