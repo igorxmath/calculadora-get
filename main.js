@@ -1,16 +1,27 @@
 const listTabs = document.getElementsByClassName("tab");
 const radios = document.getElementsByName("act");
 const step = document.getElementsByClassName("step");
+const info = JSON.parse(localStorage.getItem("info")) || "";
 
 var currentTab = 0;
 showTab(currentTab);
 
+Object.entries(info).forEach(entry => {
+    const [key, value] = entry;
+    if (key == "checked") {
+        document.getElementById(value).checked = "checked";
+    }
+    else {
+        document.getElementById(key).value = value;
+    }
+});
+
 // anonymous functions
-document.querySelector("#prevBtn").onclick = function () {
+document.querySelector("#prevBtn").onclick = () => {
     nextPrev(-1);
 }
 
-document.querySelector("#nextBtn").onclick = function () {
+document.querySelector("#nextBtn").onclick = () => {
     nextPrev(1);
 }
 
@@ -55,16 +66,6 @@ function nextPrev(n) {
     showTab(currentTab);
 }
 
-function validadeRadios() {
-    for (item of radios) {
-        if (item.checked) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 function validadeForm() {
     const dataInput = listTabs[currentTab].getElementsByTagName("input");
 
@@ -95,10 +96,10 @@ function fixStepIndicator(n) {
 }
 
 function waitFunction() {
-    setTimeout(showPage, 1000);
+    setTimeout(showResultsSection, 1000);
 }
 
-function showPage() {
+function showResultsSection() {
     document.getElementById("loaderid").style.display = "none";
     document.getElementById("results").style.display = "block";
     document.getElementById("showResultsGET").innerHTML = calculateTotalEnergy().toFixed(2) + " Kcal";
@@ -112,6 +113,16 @@ function calculateBasal() {
 
     let weight = itemsForm[0].value, height = itemsForm[1].value, age = itemsForm[2].value, sex = itemsForm[3].value;
 
+    const infoUser = {
+        "weight" : weight,
+        "height" : height,
+        "age" : age,
+        "sex" : sex,
+        "checked" : validadeRadios()
+    }
+
+    localStorage.setItem("info", JSON.stringify(infoUser))
+
     if (sex == "Option 1") {
         BMR = 66.5 + (13.75 * weight) + (5.003 * height) - (6.75 * age);
     }
@@ -122,15 +133,18 @@ function calculateBasal() {
     return BMR
 }
 
-function calculateActivite() {
-    let itemCheck;
-    let multiplier;
-
+function validadeRadios() {
     for (item of radios) {
         if (item.checked) {
-            itemCheck = item.value
+            return item.id
         }
     }
+    return false;
+}
+
+function calculateActivity() {
+    let itemCheck = validadeRadios();
+    let multiplier;
 
     switch(itemCheck){
         case "low":
@@ -151,5 +165,5 @@ function calculateActivite() {
 }
 
 function calculateTotalEnergy() {
-    return calculateBasal() * calculateActivite();
+    return calculateBasal() * calculateActivity();
 }
